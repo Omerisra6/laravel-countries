@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ WelcomeController::class, 'show' ]);
 
 Route::middleware([ 'auth' ])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', [ DashboardController::class, 'show' ])->name('dashboard');
+    Route::resource('countries', CountryController::class);
 });
 
 require __DIR__.'/auth.php';
