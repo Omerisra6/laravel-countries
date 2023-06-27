@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ WelcomeController::class, 'show' ]);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware([ 'auth' ])->group(function () {
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+});
 
 require __DIR__.'/auth.php';
